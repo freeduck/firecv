@@ -1,3 +1,7 @@
 Extract timeLastUsed
 
 select json_extract(value,'$.timeLastUsed') from json_each(readfile('logins.json'),'$.logins');
+
+Table
+CREATE TABLE logins(PLACE TEXT, FIRST INTEGER NOT NULL, LAST INTEGER NOT NULL, EVERYTHING TEXT NOT NULL);
+insert into logins(place,first,last,everything) select json_extract(value,'$.formSubmitURL'), json_extract(value,'$.timeCreated'), json_extract(value,'$.timeLastUsed'), value from json_each(readfile('logins.json'),'$.logins');
