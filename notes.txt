@@ -1,0 +1,3 @@
+Extract timeLastUsed
+
+select json_extract(value,'$.timeLastUsed') from json_each(readfile('logins.json'),'$.logins');
