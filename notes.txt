@@ -5,3 +5,11 @@ select json_extract(value,'$.timeLastUsed') from json_each(readfile('logins.json
 Table
 CREATE TABLE logins(PLACE TEXT, FIRST INTEGER NOT NULL, LAST INTEGER NOT NULL, EVERYTHING TEXT NOT NULL);
 insert into logins(place,first,last,everything) select json_extract(value,'$.formSubmitURL'), json_extract(value,'$.timeCreated'), json_extract(value,'$.timeLastUsed'), value from json_each(readfile('logins.json'),'$.logins');
+select DATE(first/1000, 'unixepoch'),DATE(last/1000, 'unixepoch'),place from logins where place like '%moc%';
+result:
+2020-08-05|2022-05-02|http://rfnet.dev2.mocsystems.com
+2020-08-05|2022-05-02|http://smk-knj.dev3.mocsystems.com
+2020-08-05|2022-05-02|http://vdk.dev3.mocsystems.com
+2020-08-05|2022-05-02|http://vdk-shop.dev3.mocsystems.com
+2020-08-05|2022-05-02|http://venstre-cwin.dev.mocsystems.com
+unexpected!!!
